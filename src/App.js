@@ -10,40 +10,48 @@ function App() {
       .then((response) => response.json())
       .then((json) => setPosts(json));
   }, [])
+
   function deletePost(id){
     const newPosts = posts.filter((post)=> id!==post.id)
+    setPosts(newPosts);
 
-    setPosts(newPosts)
-  }
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: 'DELETE'
+    })
+}
+
+
   return (
     <div className="App">
       <header className="App-header">
         <p>
           My first application
         </p>
-        <table border="1" width="1200px" height="100px">
-          <thead>
-            <tr>
-              <td>userId</td>
-              <td>id</td>
-              <td>title</td>
-              <td>body</td>
-              <td>actions</td>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map(post =>
-              <tr key={post.id}>
-                <td>{post.userId}</td>
-                <td>{post.id}</td>
-                <td>{post.title}</td>
-                <td>{post.body}</td>
-                <td><button onClick={()=> deletePost(post.id)}>D</button></td>
-              </tr>)}
+        <div className='table-flex'>
+          <table border="1" width="1200px" height="100px">
+              <thead>
+                <tr>
+                  <td>userId</td>
+                  <td>id</td>
+                  <td>title</td>
+                  <td>body</td>
+                  <td>actions</td>
+                </tr>
+              </thead>
+            <tbody>
+              {posts.map(post =>
+                  <tr key={post.id}>
+                    <td className='column_userId'>{post.userId}</td>
+                    <td className='column_id'>{post.id}</td>
+                    <td className='column_title'>{post.title}</td>
+                    <td className='column_body'>{post.body}</td>
+                  <td className='column_button'><button onClick={() => deletePost(post.id)} >D</button></td>
+                  </tr>)}
+            </tbody>
 
-          </tbody>
+          </table>
+        </div>
 
-        </table>
       </header>
     </div>
   );

@@ -12,6 +12,19 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+table{
+width: 100%;
+}
+.column_userId,.column_id,.column_button{
+  width: 5%;
+}
+.column_title{
+  width: 30%;
+}
+.column_body{
+  width: 55%;
+}
+
 
 .App-link {
   color: #61dafb;
